@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom"
+	beforePageLoad="#{controller.beforePageLoad}" afterPageLoad="#{controller.afterPageLoad}"
+	pageTitle="Feed">
+	
+	<xp:this.dataContexts>
+		<xp:dataContext var="feed" value="${Feeds[empty param.id ? 'new' : param.id]}"/>
+	</xp:this.dataContexts>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/feeds.xsp"/>
+	</xp:this.navigationRules>
+
+	<xc:layout navigationPath="/Feeds/Feed">
+		<xp:this.facets>
+			<xc:linksbar xp:key="LeftColumn"/>
+		</xp:this.facets>
+		
+		<xe:formTable>
+			<xe:this.facets>
+				<xp:div xp:key="footer">
+					<xp:button id="save" value="Save">
+						<xp:eventHandler event="onclick" submit="true" action="#{controller.save}"/>
+					</xp:button>
+				</xp:div>
+			</xe:this.facets>
+		
+			<xe:formRow label="Name">
+				<xp:inputText value="#{feed.Name}"/>
+			</xe:formRow>
+			<xe:formRow label="URL">
+				<xp:inputText value="#{feed.URL}"/>
+			</xe:formRow>
+		</xe:formTable>
+
+	</xc:layout>
+</xp:view>

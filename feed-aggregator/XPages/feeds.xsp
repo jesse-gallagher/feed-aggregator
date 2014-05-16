@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom" beforePageLoad="#{controller.beforePageLoad}"
+	afterPageLoad="#{controller.afterPageLoad}" pageTitle="Feeds">
+
+	<xc:layout navigationPath="/Feeds/All">
+		<xp:this.facets>
+			<xc:linksbar xp:key="LeftColumn" />
+			<xp:div styleClass="lotusActionBar" xp:key="ActionBar">
+				<xp:link value="/feed.xsp" text="New Feed" styleClass="lotusBtn" loaded="${not view.readonly}" />
+			</xp:div>
+		</xp:this.facets>
+
+		<xp:viewPanel value="#{Feeds.all}" pageName="/feed.xsp">
+			<xp:this.facets>
+				<xp:pager partialRefresh="true" layout="Previous Group Next" xp:key="headerPager" id="pager1"></xp:pager>
+				<xp:pager partialRefresh="true" layout="Previous Group Next" xp:key="footerPager" id="pager2"></xp:pager>
+			</xp:this.facets>
+
+			<xp:viewColumn columnName="Name" displayAs="link">
+				<xp:viewColumnHeader value="Name" />
+			</xp:viewColumn>
+			<xp:viewColumn columnName="URL">
+				<xp:viewColumnHeader value="URL" />
+			</xp:viewColumn>
+		</xp:viewPanel>
+
+	</xc:layout>
+</xp:view>

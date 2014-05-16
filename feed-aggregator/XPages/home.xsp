@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom"
+	beforePageLoad="#{controller.beforePageLoad}" afterPageLoad="#{controller.afterPageLoad}"
+	pageTitle="Home">
+
+	<xc:layout navigationPath="/Home">
+		<xp:this.facets>
+			<xc:linksbar xp:key="LeftColumn"/>
+		</xp:this.facets>
+		
+		<xp:text tagName="h1" value="${database.title}"/>
+		
+		<xp:viewPanel value="#{Posts.all}" var="post">
+			<xp:viewColumn columnName="Posted">
+				<xp:viewColumnHeader value="Posted"/>
+			</xp:viewColumn>
+			<xp:viewColumn columnName="FeedName">
+				<xp:viewColumnHeader value="Feed Name"/>
+			</xp:viewColumn>
+			<xp:viewColumn columnName="Title" displayAs="link" pageUrl="#{post.URL}">
+				<xp:viewColumnHeader value="Title"/>
+			</xp:viewColumn>
+		</xp:viewPanel>
+	</xc:layout>
+</xp:view>
