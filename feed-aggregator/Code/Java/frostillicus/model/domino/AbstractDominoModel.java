@@ -10,6 +10,7 @@ import javax.faces.model.DataModel;
 
 import lotus.domino.NotesException;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.FileRowData;
 import com.ibm.xsp.model.domino.DominoAttachmentDataModel;
@@ -304,6 +305,9 @@ public abstract class AbstractDominoModel extends AbstractModelObject {
 	 ************************************************************************/
 	public final String getOpenPageURL(final String pageName, final boolean readOnly) {
 		if (isCategory()) {
+			return "";
+		}
+		if(StringUtil.isEmpty(pageName)) {
 			return "";
 		}
 		return pageName + (pageName.contains("?") ? "&" : "?") + "id=" + documentId_;

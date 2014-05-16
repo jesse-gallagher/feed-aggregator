@@ -10,16 +10,60 @@
 		
 		<xp:text tagName="h1" value="${database.title}"/>
 		
-		<xp:viewPanel value="#{Posts.all}" var="post">
-			<xp:viewColumn columnName="Posted">
-				<xp:viewColumnHeader value="Posted"/>
-			</xp:viewColumn>
-			<xp:viewColumn columnName="FeedName">
-				<xp:viewColumnHeader value="Feed Name"/>
-			</xp:viewColumn>
-			<xp:viewColumn columnName="Title" displayAs="link" pageUrl="#{post.URL}">
-				<xp:viewColumnHeader value="Title"/>
-			</xp:viewColumn>
-		</xp:viewPanel>
+<!--		<xe:dataView collapsibleDetail="true" infiniteScroll="enable">-->
+<!--			<xe:this.data>-->
+<!--				<xp:dominoView var="allPosts" viewName="Posts\All" />-->
+<!--			</xe:this.data>-->
+<!---->
+<!--			<xe:this.summaryColumn>-->
+<!--				<xe:viewSummaryColumn columnName="Title"></xe:viewSummaryColumn>-->
+<!--			</xe:this.summaryColumn>-->
+<!--			<xe:this.extraColumns>-->
+<!--				<xe:viewExtraColumn columnName="Posted">-->
+<!--					<xe:this.converter>-->
+<!--						<xp:convertDateTime dateStyle="short"></xp:convertDateTime>-->
+<!--					</xe:this.converter>-->
+<!--				</xe:viewExtraColumn>-->
+<!--				<xe:viewExtraColumn columnName="FeedName"></xe:viewExtraColumn>-->
+<!---->
+<!--			</xe:this.extraColumns>-->
+<!--		</xe:dataView>-->
+		<xe:dataView collapsibleDetail="true" value="${Posts.all}" var="post" detailsOnClient="true">
+			<xe:this.facets>
+				<xp:div xp:key="detail">
+					<xp:text htmlFilter="striptags" escape="false" value="#{post.Description}" />
+				</xp:div>
+			</xe:this.facets>
+
+			<xe:this.summaryColumn>
+				<xe:viewSummaryColumn columnName="Title" href="#{post.URL}"></xe:viewSummaryColumn>
+			</xe:this.summaryColumn>
+			<xe:this.extraColumns>
+				<xe:viewExtraColumn columnName="Posted">
+					<xe:this.converter>
+						<xp:convertDateTime dateStyle="short"></xp:convertDateTime>
+					</xe:this.converter>
+				</xe:viewExtraColumn>
+				<xe:viewExtraColumn columnName="FeedName"></xe:viewExtraColumn>
+
+			</xe:this.extraColumns>
+		</xe:dataView>
+
+		<!--		<xp:viewPanel value="${Posts.all}" var="post">-->
+<!--			<xp:this.facets>-->
+<!--				<xp:pager partialRefresh="true" layout="Previous Group Next" xp:key="headerPager" id="pager1" partialExecute="true"></xp:pager>-->
+<!--				<xp:pager partialRefresh="true" layout="Previous Group Next" xp:key="footerPager" id="pager2" partialExecute="true"></xp:pager>-->
+<!--			</xp:this.facets>-->
+<!---->
+<!--			<xp:viewColumn columnName="Posted">-->
+<!--				<xp:viewColumnHeader value="Posted" />-->
+<!--			</xp:viewColumn>-->
+<!--			<xp:viewColumn columnName="FeedName">-->
+<!--				<xp:viewColumnHeader value="Feed Name" />-->
+<!--			</xp:viewColumn>-->
+<!--			<xp:viewColumn columnName="Title" displayAs="link" pageUrl="#{post.URL}">-->
+<!--				<xp:viewColumnHeader value="Title" />-->
+<!--			</xp:viewColumn>-->
+<!--		</xp:viewPanel>-->
 	</xc:layout>
 </xp:view>
